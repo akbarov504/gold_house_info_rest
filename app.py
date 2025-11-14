@@ -11,6 +11,7 @@ from routes.user_route import user_bp
 from routes.contact_route import contact_bp
 from routes.product_route import product_bp
 from routes.language_route import language_bp
+from routes.certificate_route import certificate_bp
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -41,9 +42,11 @@ app.register_blueprint(user_bp)
 app.register_blueprint(contact_bp)
 app.register_blueprint(product_bp)
 app.register_blueprint(language_bp)
+app.register_blueprint(certificate_bp)
 
 with app.app_context():
     db.create_all()
+    super_admin_create()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5555)
+    app.run(host="0.0.0.0", port=5050)
