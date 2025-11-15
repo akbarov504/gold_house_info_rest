@@ -140,7 +140,6 @@ class LanguageResource(Resource):
         return get_response("Successfully updated language", None, 200), 200
 
 class LanguageListCreateResource(Resource):
-    decorators = [login_required()]
 
     def get(self):
         """Language List API
@@ -162,7 +161,8 @@ class LanguageListCreateResource(Resource):
         language_list = Language.query.filter_by().order_by(Language.created_at.desc()).all()
         result_language_list = [Language.to_dict(language) for language in language_list]
         return get_response("Language List", result_language_list, 200), 200
-
+    
+    @login_required()
     def post(self):
         """Language Create API
         Path - /api/language
